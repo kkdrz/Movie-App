@@ -1,8 +1,8 @@
 package pl.edu.pwr.drozd.movieapp
 
 import android.content.Context
-import android.content.res.Resources
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +14,10 @@ class MoviesAdapter(val context: Context, val moviesList: List<Movie>) : Recycle
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         holder?.bindMovie(moviesList[position])
-        if (position % 2 != 0) holder?.moveImageToRight()
+        when (position % 2) {
+            0 -> holder?.moveImageToLeft()
+            else -> holder?.moveImageToRight()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
@@ -41,13 +44,29 @@ class MoviesAdapter(val context: Context, val moviesList: List<Movie>) : Recycle
         fun moveImageToRight() {
             (itemView.movie_image.layoutParams as RelativeLayout.LayoutParams).apply {
                 addRule(RelativeLayout.ALIGN_PARENT_END, RelativeLayout.TRUE)
+                removeRule(RelativeLayout.ALIGN_PARENT_START)
                 leftMargin = context.resources.getDimensionPixelOffset(R.dimen.movie_image_marginRightLeft)
                 rightMargin = 0
             }
 
             (itemView.movie_info_layout.layoutParams as RelativeLayout.LayoutParams).apply {
                 addRule(RelativeLayout.START_OF, R.id.movie_image)
-                addRule(RelativeLayout.END_OF)
+                removeRule(RelativeLayout.END_OF)
+            }
+        }
+
+        fun moveImageToLeft() {
+            (itemView.movie_image.layoutParams as RelativeLayout.LayoutParams).apply {
+                addRule(RelativeLayout.ALIGN_PARENT_START, RelativeLayout.TRUE)
+                removeRule(RelativeLayout.ALIGN_PARENT_END)
+
+                leftMargin = 0
+                rightMargin = context.resources.getDimensionPixelOffset(R.dimen.movie_image_marginRightLeft)
+            }
+
+            (itemView.movie_info_layout.layoutParams as RelativeLayout.LayoutParams).apply {
+                addRule(RelativeLayout.END_OF, R.id.movie_image)
+                removeRule(RelativeLayout.START_OF)
             }
         }
     }
