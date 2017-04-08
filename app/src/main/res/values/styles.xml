@@ -8,4 +8,32 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="MovieListRow">
+        <item name="android:background">@color/movie_list_row_backgroundColor</item>
+        <item name="android:padding">@dimen/movie_list_row_padding</item>
+        <item name="android:layout_marginTop">@dimen/movie_list_row_margin</item>
+        <item name="android:layout_marginStart">@dimen/movie_list_row_margin</item>
+        <item name="android:layout_marginEnd">@dimen/movie_list_row_margin</item>
+    </style>
+
+    <style name="MovieListRowText">
+        <item name="android:textColor">@color/movie_list_row_textColor</item>
+    </style>
+
+    <style name="MovieListRowText.MovieTitle">
+        <item name="android:textSize">@dimen/movie_title_textSize</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:text">@string/title</item>
+    </style>
+
+    <style name="MovieListRowText.MovieGenre">
+        <item name="android:text">@string/genre</item>
+    </style>
+
+    <style name="MovieListRowText.MovieYear">
+        <item name="android:text">@string/year</item>
+    </style>
+
+
+
 </resources>

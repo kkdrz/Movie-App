@@ -13,14 +13,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        with(recycler_view){
-            adapter = MoviesAdapter(movieList)
+        with(recycler_view) {
+            adapter = MoviesAdapter(context, movieList)
             layoutManager = LinearLayoutManager(applicationContext)
         }
-
     }
 
-    private fun prepareMovieData() : MutableList<Movie> {
+    private fun prepareMovieData(): MutableList<Movie> {
         return mutableListOf(Movie("Mad Max: Fury Road", "Action & Adventure", "2015"),
                 Movie("Inside Out", "Animation, Kids & Family", "2015"),
                 Movie("Inside Out", "Animation, Kids & Family", "2015"),
