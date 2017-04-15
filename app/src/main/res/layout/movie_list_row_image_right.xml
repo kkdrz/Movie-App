@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MovieListRow"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/movie_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/movie_image_marginRightLeft"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/movie_image_contentDescription"
+        android:maxHeight="@dimen/movie_image_maxHeight"
+        android:src="@drawable/movie_placeholder"
+        app:srcCompat="@drawable/movie_placeholder" />
+
+
+    <TextView
+        android:id="@+id/movie_title"
+        style="@style/MovieListRowText.MovieTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@id/movie_image" />
+
+    <TextView
+        android:id="@+id/movie_genre"
+        style="@style/MovieListRowText.MovieGenre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/movie_title"
+        android:layout_toStartOf="@id/movie_image" />
+
+    <TextView
+        android:id="@+id/movie_year"
+        style="@style/MovieListRowText.MovieYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@id/movie_image" />
+
+</RelativeLayout>

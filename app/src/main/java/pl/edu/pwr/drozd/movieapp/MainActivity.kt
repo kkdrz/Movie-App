@@ -7,6 +7,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    //swipe w prawo usuwa
+    //long click wyswietla image oka w prawym dolnym, za kazdym razem bez znaczenia czy parzysty element listy
+    //click przenosi do activity z infomracjami o filmie, na constraint_layout'cie
+    //image, na nim tytuł, pod tym ocena i gwiazdki, potem opis
+    //usuniecie, oczko i gwiazdki pamieta do zamkniecia aplikacji
+
     val movieList: MutableList<Movie> = prepareMovieData()
 
     override fun onCreate(savedInstanceState: Bundle?) {
