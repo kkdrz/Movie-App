@@ -2,7 +2,6 @@ package pl.edu.pwr.drozd.movieapp
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,7 @@ import android.widget.RelativeLayout
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.movie_list_row.view.*
 
-class MoviesAdapter(val context: Context, val moviesList: List<Movie>) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         holder?.bindMovie(moviesList[position])
@@ -43,6 +42,7 @@ class MoviesAdapter(val context: Context, val moviesList: List<Movie>) : Recycle
 
         fun moveImageToRight() {
             (itemView.movie_image.layoutParams as RelativeLayout.LayoutParams).apply {
+
                 addRule(RelativeLayout.ALIGN_PARENT_END, RelativeLayout.TRUE)
                 removeRule(RelativeLayout.ALIGN_PARENT_START)
                 leftMargin = context.resources.getDimensionPixelOffset(R.dimen.movie_image_marginRightLeft)
@@ -68,6 +68,14 @@ class MoviesAdapter(val context: Context, val moviesList: List<Movie>) : Recycle
                 addRule(RelativeLayout.END_OF, R.id.movie_image)
                 removeRule(RelativeLayout.START_OF)
             }
+        }
+
+    }
+
+    fun  onItemRemoved(position: Int?) {
+        if (position != null) {
+            moviesList.removeAt(position)
+            notifyDataSetChanged()
         }
     }
 

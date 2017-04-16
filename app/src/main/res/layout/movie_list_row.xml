@@ -12,6 +12,7 @@
         android:adjustViewBounds="true"
         android:contentDescription="@string/movie_image_contentDescription"
         android:maxHeight="@dimen/movie_image_maxHeight"
+        android:minHeight="@dimen/movie_image_maxHeight"
         android:src="@drawable/movie_placeholder" />
 
     <RelativeLayout
@@ -31,7 +32,7 @@
             android:id="@+id/movie_genre"
             style="@style/MovieListRowText.MovieGenre"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@id/movie_title" />
 
         <TextView

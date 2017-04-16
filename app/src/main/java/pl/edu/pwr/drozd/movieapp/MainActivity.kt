@@ -1,13 +1,24 @@
 package pl.edu.pwr.drozd.movieapp
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
+import android.support.v7.widget.helper.ItemTouchHelper.END
+import android.support.v7.widget.helper.ItemTouchHelper.SimpleCallback
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     val movieList: MutableList<Movie> = prepareMovieData()
+    val itemTouchHelper: ItemTouchHelper = ItemTouchHelper(object : SimpleCallback(0, END) {
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
+            (recycler_view.adapter as MoviesAdapter).onItemRemoved(viewHolder?.adapterPosition)
+        }
+
+        override fun onMove(rV: RecyclerView?, vH: RecyclerView.ViewHolder?, t: RecyclerView.ViewHolder?) = false
+    })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,6 +28,7 @@ class MainActivity : AppCompatActivity() {
             adapter = MoviesAdapter(context, movieList)
             layoutManager = LinearLayoutManager(applicationContext)
         }
+        itemTouchHelper.attachToRecyclerView(recycler_view)
     }
 
     private fun prepareMovieData(): MutableList<Movie> {
@@ -55,5 +67,6 @@ class MainActivity : AppCompatActivity() {
                 Movie("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014"))
     }
 }
+
 
 
