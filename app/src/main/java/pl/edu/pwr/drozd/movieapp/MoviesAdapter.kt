@@ -42,7 +42,6 @@ class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>) : 
 
         fun moveImageToRight() {
             (itemView.movie_image.layoutParams as RelativeLayout.LayoutParams).apply {
-
                 addRule(RelativeLayout.ALIGN_PARENT_END, RelativeLayout.TRUE)
                 removeRule(RelativeLayout.ALIGN_PARENT_START)
                 leftMargin = context.resources.getDimensionPixelOffset(R.dimen.movie_image_marginRightLeft)
@@ -75,7 +74,8 @@ class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>) : 
     fun  onItemRemoved(position: Int?) {
         if (position != null) {
             moviesList.removeAt(position)
-            notifyDataSetChanged()
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, moviesList.size - position - 1)
         }
     }
 
