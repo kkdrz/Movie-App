@@ -4,4 +4,6 @@
     <string name="title">Title</string>
     <string name="genre">Genre</string>
     <string name="year">Year</string>
+    <string name="movie_removed">Movie removed</string>
+    <string name="undo">UNDO</string>
 </resources>

@@ -1,6 +1,7 @@
 package pl.edu.pwr.drozd.movieapp
 
 import android.content.Context
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -26,16 +27,17 @@ class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>) : 
 
     override fun getItemCount(): Int = moviesList.size
 
-
     class ViewHolder(itemView: View, val context: Context) : RecyclerView.ViewHolder(itemView) {
         fun bindMovie(movie: Movie) {
-            with(movie) {
-                Glide.with(itemView.context).load(URL)
-                        .placeholder(R.drawable.movie_placeholder)
-                        .into(itemView.movie_image)
-                itemView.movie_title.text = title
-                itemView.movie_genre.text = genre
-                itemView.movie_year.text = year
+            itemView.apply {
+                with(movie) {
+                    Glide.with(context).load(URL)
+                            .placeholder(R.drawable.movie_placeholder)
+                            .into(itemView.movie_image)
+                    movie_title.text = title
+                    movie_genre.text = genre
+                    movie_year.text = year
+                }
             }
 
         }
@@ -53,7 +55,6 @@ class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>) : 
                 removeRule(RelativeLayout.END_OF)
             }
         }
-
         fun moveImageToLeft() {
             (itemView.movie_image.layoutParams as RelativeLayout.LayoutParams).apply {
                 addRule(RelativeLayout.ALIGN_PARENT_START, RelativeLayout.TRUE)
@@ -71,12 +72,22 @@ class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>) : 
 
     }
 
-    fun  onItemRemoved(position: Int?) {
+    fun onItemRemoved(viewHolder: RecyclerView.ViewHolder?, recycler_view: RecyclerView) {
+        val position = viewHolder?.adapterPosition
+
         if (position != null) {
+            val removedMovie = moviesList[position]
             moviesList.removeAt(position)
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, moviesList.size - position - 1)
+
+            Snackbar.make(recycler_view, R.string.movie_removed, Snackbar.LENGTH_LONG)
+                    .setAction(R.string.undo, {
+                        moviesList.add(position, removedMovie)
+                        notifyItemInserted(position)
+                        recycler_view.scrollToPosition(position)
+                        notifyItemRangeChanged(position, moviesList.size - position - 1)
+                    }).show()
         }
     }
-
 }

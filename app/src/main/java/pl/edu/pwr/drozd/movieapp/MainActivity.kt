@@ -11,10 +11,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    //czy lepiej przesuwać elementy w layoucie, czy ładować dwa różne layouty?
+
     val movieList: MutableList<Movie> = prepareMovieData()
     val itemTouchHelper: ItemTouchHelper = ItemTouchHelper(object : SimpleCallback(0, END) {
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
-            (recycler_view.adapter as MoviesAdapter).onItemRemoved(viewHolder?.adapterPosition)
+            (recycler_view.adapter as MoviesAdapter).onItemRemoved(viewHolder, recycler_view)
         }
 
         override fun onMove(rV: RecyclerView?, vH: RecyclerView.ViewHolder?, t: RecyclerView.ViewHolder?) = false
