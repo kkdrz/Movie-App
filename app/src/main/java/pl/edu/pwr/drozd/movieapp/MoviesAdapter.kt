@@ -1,6 +1,7 @@
 package pl.edu.pwr.drozd.movieapp
 
 import android.content.Context
+import android.content.Intent
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -12,11 +13,19 @@ import kotlinx.android.synthetic.main.movie_list_row.view.*
 
 class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
+    companion object {
+        val SELECTED_MOVIE = "S_MOVIE"
+    }
+
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         holder?.bindMovie(moviesList[position])
         when (position % 2) {
             0 -> holder?.moveImageToLeft()
             else -> holder?.moveImageToRight()
+        }
+        holder?.itemView?.setOnClickListener {
+            context.startActivity(Intent(context, MovieDetailsActivity::class.java)
+                    .putExtra(SELECTED_MOVIE, moviesList[holder.adapterPosition]))
         }
     }
 
@@ -55,6 +64,7 @@ class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>) : 
                 removeRule(RelativeLayout.END_OF)
             }
         }
+
         fun moveImageToLeft() {
             (itemView.movie_image.layoutParams as RelativeLayout.LayoutParams).apply {
                 addRule(RelativeLayout.ALIGN_PARENT_START, RelativeLayout.TRUE)

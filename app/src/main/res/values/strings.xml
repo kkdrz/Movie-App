@@ -6,4 +6,7 @@
     <string name="year">Year</string>
     <string name="movie_removed">Movie removed</string>
     <string name="undo">UNDO</string>
+    <string name="rate">Ocena:</string>
+    <string name="selected_movie">selected_movie</string>
+    <string name="movie_poster">Movie poster</string>
 </resources>
