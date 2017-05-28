@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.movie_list_row_image_left.view.*
 
@@ -17,9 +18,17 @@ class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>) : 
             0 -> (holder as ViewHolderLeft).bindMovie(moviesList[position])
             else -> (holder as ViewHolderRight).bindMovie(moviesList[position])
         }
-        holder.itemView?.setOnClickListener {
-            context.startActivity(Intent(context, MovieDetailsActivity::class.java)
-                    .putExtra(SELECTED_MOVIE, moviesList[holder.adapterPosition]))
+
+        with(holder.itemView) {
+            setOnClickListener {
+                context.startActivity(Intent(context, MovieDetailsActivity::class.java)
+                        .putExtra(SELECTED_MOVIE, moviesList[holder.adapterPosition]))
+            }
+            setOnLongClickListener {
+                moviesList[position].watched = eye_img.visibility != RelativeLayout.VISIBLE
+                notifyItemChanged(position)
+                true
+            }
         }
     }
 
@@ -62,6 +71,8 @@ class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>) : 
                 itemView.movie_title.text = title
                 itemView.movie_genre.text = genre
                 itemView.movie_year.text = year
+                if (watched) itemView.eye_img.visibility = RecyclerView.VISIBLE
+                else itemView.eye_img.visibility = RecyclerView.INVISIBLE
             }
         }
 
