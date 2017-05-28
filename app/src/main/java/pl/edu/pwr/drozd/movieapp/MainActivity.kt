@@ -2,36 +2,18 @@ package pl.edu.pwr.drozd.movieapp
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
-import android.support.v7.widget.helper.ItemTouchHelper.END
-import android.support.v7.widget.helper.ItemTouchHelper.SimpleCallback
-import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(), MainFragment.onMovieClicked   {
 
     //long click wyswietla image oka w prawym dolnym, za kazdym razem bez znaczenia czy parzysty element listy
     //usuniecie, oczko i gwiazdki pamieta do zamkniecia aplikacji
-
     val movieList: MutableList<Movie> = prepareMovieData()
-    val itemTouchHelper: ItemTouchHelper = ItemTouchHelper(object : SimpleCallback(0, END) {
-        override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
-            (recycler_view.adapter as MoviesAdapter).onItemRemoved(viewHolder, recycler_view)
-        }
-
-        override fun onMove(rV: RecyclerView?, vH: RecyclerView.ViewHolder?, t: RecyclerView.ViewHolder?) = false
-    })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        with(recycler_view) {
-            adapter = MoviesAdapter(context, movieList)
-            layoutManager = LinearLayoutManager(applicationContext)
-        }
-        itemTouchHelper.attachToRecyclerView(recycler_view)
+        displayMainFragment()
     }
 
     private fun prepareMovieData(): MutableList<Movie> {
@@ -69,6 +51,26 @@ class MainActivity : AppCompatActivity() {
                 Movie("The LEGO Movie", "Animation", "2014"),
                 Movie("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014"))
     }
+
+    fun displayMainFragment() {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.movie_details_fragment_placeholder, MainFragment(this, prepareMovieData(), supportFragmentManager))
+        fragmentTransaction.commit()
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount == 0)
+            super.onBackPressed()
+        else
+            supportFragmentManager.popBackStack()
+    }
+
+    override fun showMovieDetails(movie: Movie) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+
+
 }
 
 

@@ -3,8 +3,7 @@ package pl.edu.pwr.drozd.movieapp
 import android.os.Parcel
 import android.os.Parcelable
 
-
-data class Movie(val title: String, val genre: String, val year: String, val description: String = "BLAH BLAH", val URL: String = "URL", var watched: Boolean = false) : Parcelable {
+data class Movie(val title: String, val genre: String, val year: String, val description: String = "BLAH BLAH", val URL: String = "URL", var watched: Boolean = false, var rating: Int = 0) : Parcelable {
     companion object {
         @JvmField val CREATOR: Parcelable.Creator<Movie> = object : Parcelable.Creator<Movie> {
             override fun createFromParcel(source: Parcel): Movie = Movie(source)
@@ -18,7 +17,8 @@ data class Movie(val title: String, val genre: String, val year: String, val des
     source.readString(),
     source.readString(),
     source.readString(),
-    1 == source.readInt()
+    1 == source.readInt(),
+    source.readInt()
     )
 
     override fun describeContents() = 0
@@ -30,5 +30,6 @@ data class Movie(val title: String, val genre: String, val year: String, val des
         dest.writeString(description)
         dest.writeString(URL)
         dest.writeInt((if (watched) 1 else 0))
+        dest.writeInt(rating)
     }
 }

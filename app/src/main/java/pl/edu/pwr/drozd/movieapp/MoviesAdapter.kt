@@ -1,8 +1,9 @@
 package pl.edu.pwr.drozd.movieapp
 
+
 import android.content.Context
-import android.content.Intent
 import android.support.design.widget.Snackbar
+import android.support.v4.app.FragmentManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,7 @@ import android.widget.RelativeLayout
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.movie_list_row_image_left.view.*
 
-class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>, val FManager: FragmentManager) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         when (holder?.itemViewType) {
@@ -21,8 +22,7 @@ class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>) : 
 
         with(holder.itemView) {
             setOnClickListener {
-                context.startActivity(Intent(context, MovieDetailsActivity::class.java)
-                        .putExtra(SELECTED_MOVIE, moviesList[holder.adapterPosition]))
+                startDetailsFragment(moviesList[position])
             }
             setOnLongClickListener {
                 moviesList[position].watched = eye_img.visibility != RelativeLayout.VISIBLE
@@ -30,6 +30,14 @@ class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>) : 
                 true
             }
         }
+    }
+
+    private fun startDetailsFragment(movie: Movie) {
+        val FTransaction = FManager.beginTransaction()
+
+        FTransaction.add(R.id.movie_details_fragment_placeholder, DetailsFragment(movie))
+        FTransaction.addToBackStack(DetailsFragment.TAG)
+        FTransaction.commit()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
@@ -97,3 +105,5 @@ class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>) : 
         }
     }
 }
+
+

@@ -11,4 +11,5 @@
 
     <color name="movie_list_row_backgroundColor">@color/colorPrimaryDark</color>
     <color name="movie_list_row_textColor">#FFFFFF</color>
+    <color name="movie_details_background">#FFFFFF</color>
 </resources>
