@@ -10,19 +10,14 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.movie_list_row_image_left.view.*
 
-class MoviesAdapter(val context: Context, val moviesList: List<Movie>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
-
-    companion object {
-        val SELECTED_MOVIE = "S_MOVIE"
-    }
+class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
-        when(holder?.itemViewType) {
+        when (holder?.itemViewType) {
             0 -> (holder as ViewHolderLeft).bindMovie(moviesList[position])
             else -> (holder as ViewHolderRight).bindMovie(moviesList[position])
         }
-        holder?.itemView?.setOnClickListener {
+        holder.itemView?.setOnClickListener {
             context.startActivity(Intent(context, MovieDetailsActivity::class.java)
                     .putExtra(SELECTED_MOVIE, moviesList[holder.adapterPosition]))
         }
@@ -57,6 +52,8 @@ class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>) : 
     }
 
     companion object {
+        val SELECTED_MOVIE = "S_MOVIE"
+
         fun bindMovie(itemView: View, movie: Movie) {
             with(movie) {
                 Glide.with(itemView.context).load(URL)
@@ -67,8 +64,8 @@ class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>) : 
                 itemView.movie_year.text = year
             }
         }
-    }
 
+    }
 
     fun onItemRemoved(viewHolder: RecyclerView.ViewHolder?, recycler_view: RecyclerView) {
         val position = viewHolder?.adapterPosition
