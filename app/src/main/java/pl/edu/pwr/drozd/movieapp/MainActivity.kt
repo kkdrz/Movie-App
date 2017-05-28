@@ -1,5 +1,6 @@
 package pl.edu.pwr.drozd.movieapp
 
+import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -11,7 +12,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    //czy lepiej przesuwać elementy w layoucie, czy ładować dwa różne layouty?
+
+    //swipe w prawo usuwa
+    //long click wyswietla image oka w prawym dolnym, za kazdym razem bez znaczenia czy parzysty element listy
+    //click przenosi do activity z infomracjami o filmie, na constraint_layout'cie
+    //image, na nim tytuł, pod tym ocena i gwiazdki, potem opis
+    //usuniecie, oczko i gwiazdki pamieta do zamkniecia aplikacji
 
     val movieList: MutableList<Movie> = prepareMovieData()
     val itemTouchHelper: ItemTouchHelper = ItemTouchHelper(object : SimpleCallback(0, END) {
