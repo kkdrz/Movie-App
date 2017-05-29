@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#616161</color>
     <color name="colorPrimaryDark">#414141</color>
-    <color name="colorAccent">#b4607d8b</color>
+    <color name="colorAccent">#7F717171</color>
 
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#757575</color>
@@ -11,5 +11,5 @@
 
     <color name="movie_list_row_backgroundColor">@color/colorPrimaryDark</color>
     <color name="movie_list_row_textColor">#FFFFFF</color>
-    <color name="movie_details_background">#FFFFFF</color>
+    <color name="movie_details_background">#616161</color>
 </resources>

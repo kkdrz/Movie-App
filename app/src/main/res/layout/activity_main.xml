@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     tools:context="pl.edu.pwr.drozd.movieapp.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/movie_details_fragment_placeholder"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

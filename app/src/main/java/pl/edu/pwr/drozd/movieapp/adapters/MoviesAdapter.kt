@@ -1,9 +1,9 @@
-package pl.edu.pwr.drozd.movieapp
+package pl.edu.pwr.drozd.movieapp.adapters
 
 
 import android.content.Context
+import android.content.Intent
 import android.support.design.widget.Snackbar
-import android.support.v4.app.FragmentManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +11,12 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.movie_list_row_image_left.view.*
+import pl.edu.pwr.drozd.movieapp.ContainerActivity
+import pl.edu.pwr.drozd.movieapp.R
+import pl.edu.pwr.drozd.movieapp.data.Movie
 
-class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>, val FManager: FragmentManager) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         when (holder?.itemViewType) {
@@ -22,7 +26,8 @@ class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>, va
 
         with(holder.itemView) {
             setOnClickListener {
-                startDetailsFragment(moviesList[position])
+                context.startActivity(Intent(context, ContainerActivity::class.java)
+                        .putExtra(SELECTED_MOVIE, holder.adapterPosition))
             }
             setOnLongClickListener {
                 moviesList[position].watched = eye_img.visibility != RelativeLayout.VISIBLE
@@ -30,14 +35,6 @@ class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>, va
                 true
             }
         }
-    }
-
-    private fun startDetailsFragment(movie: Movie) {
-        val FTransaction = FManager.beginTransaction()
-
-        FTransaction.add(R.id.movie_details_fragment_placeholder, DetailsFragment(movie))
-        FTransaction.addToBackStack(DetailsFragment.TAG)
-        FTransaction.commit()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
