@@ -9,8 +9,6 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.details_fragment.view.*
 import pl.edu.pwr.drozd.movieapp.R
 
-
-
 class ImagesAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val imagesList = prepareImages()

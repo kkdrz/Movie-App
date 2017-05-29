@@ -76,8 +76,11 @@ class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>) : 
                 itemView.movie_title.text = title
                 itemView.movie_genre.text = genre
                 itemView.movie_year.text = year
-                if (watched) itemView.eye_img.visibility = RecyclerView.VISIBLE
-                else itemView.eye_img.visibility = RecyclerView.INVISIBLE
+
+                if (watched)
+                    itemView.eye_img.visibility = RecyclerView.VISIBLE
+                else
+                    itemView.eye_img.visibility = RecyclerView.INVISIBLE
             }
         }
 

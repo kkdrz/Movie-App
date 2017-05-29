@@ -10,18 +10,17 @@ import pl.edu.pwr.drozd.movieapp.adapters.MoviesAdapter
 import pl.edu.pwr.drozd.movieapp.data.Movie
 
 
-class MainActivity : AppCompatActivity()    {
+class MainActivity : AppCompatActivity() {
 
-    //long click wyswietla image oka w prawym dolnym, za kazdym razem bez znaczenia czy parzysty element listy
-    //usuniecie, oczko i gwiazdki pamieta do zamkniecia aplikacji
 
-    val itemTouchHelper: ItemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.END) {
-        override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
-            (recycler_view.adapter as MoviesAdapter).onItemRemoved(viewHolder, recycler_view)
-        }
+    val itemTouchHelper: ItemTouchHelper =
+            ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.END) {
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
+                    (recycler_view.adapter as MoviesAdapter).onItemRemoved(viewHolder, recycler_view)
+                }
 
-        override fun onMove(rV: RecyclerView?, vH: RecyclerView.ViewHolder?, t: RecyclerView.ViewHolder?) = false
-    })
+                override fun onMove(rV: RecyclerView?, vH: RecyclerView.ViewHolder?, t: RecyclerView.ViewHolder?) = false
+            })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,7 +78,6 @@ class MainActivity : AppCompatActivity()    {
                     Movie("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014"))
         }
     }
-
 }
 
 

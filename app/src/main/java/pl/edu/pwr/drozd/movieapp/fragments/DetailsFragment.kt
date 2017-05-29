@@ -35,7 +35,7 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         moviePosition = arguments.getInt(MOVIE_POSITION)
-        initializeInfo(MainActivity.movies[moviePosition])
+        initializeViewWithInfo(MainActivity.movies[moviePosition])
 
         movie_rating_bar.setOnRatingBarChangeListener { _, rating, _ ->
             MainActivity.movies[moviePosition].rating = rating
@@ -43,11 +43,11 @@ class DetailsFragment : Fragment() {
 
         image_info.setOnClickListener {
             listener?.showImagesAndCastFragments()
-            //otworz fragmenty
         }
+
     }
 
-    private fun initializeInfo(movie: Movie?) {
+    private fun initializeViewWithInfo(movie: Movie?) {
         if (movie != null) {
             with(movie) {
                 movie_title.text = title
