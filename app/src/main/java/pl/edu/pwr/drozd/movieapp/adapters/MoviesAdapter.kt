@@ -73,6 +73,7 @@ class MoviesAdapter(val context: Context, var moviesList: MutableList<Movie>) : 
                 Glide.with(itemView.context).load(URL)
                         .placeholder(R.drawable.movie_placeholder)
                         .into(itemView.movie_image)
+
                 itemView.movie_title.text = title
                 itemView.movie_genre.text = genre
                 itemView.movie_year.text = year

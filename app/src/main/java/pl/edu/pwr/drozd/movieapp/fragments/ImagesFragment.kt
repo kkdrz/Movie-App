@@ -10,7 +10,7 @@ import pl.edu.pwr.drozd.movieapp.R
 import pl.edu.pwr.drozd.movieapp.adapters.ImagesAdapter
 
 
-class ImagesFragment : Fragment()   {
+class ImagesFragment : Fragment() {
     companion object {
         const val TAG = "ImagesFragment"
     }
@@ -20,9 +20,6 @@ class ImagesFragment : Fragment()   {
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        with(images_recycler) {
-            adapter = ImagesAdapter(context)
-
-        }
+        images_recycler.adapter = ImagesAdapter(context)
     }
 }

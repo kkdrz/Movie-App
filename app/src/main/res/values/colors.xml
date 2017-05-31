@@ -12,4 +12,6 @@
     <color name="movie_list_row_backgroundColor">@color/colorPrimaryDark</color>
     <color name="movie_list_row_textColor">#FFFFFF</color>
     <color name="movie_details_background">#616161</color>
+
+    <color name="images_fragment_background">#000000</color>
 </resources>

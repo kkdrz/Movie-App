@@ -25,7 +25,8 @@
         style="@style/MovieListRowText.MovieTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/movie_image" />
+        android:layout_toEndOf="@+id/movie_image"
+        android:layout_toStartOf="@+id/movie_year"/>
 
     <TextView
         android:id="@+id/movie_genre"

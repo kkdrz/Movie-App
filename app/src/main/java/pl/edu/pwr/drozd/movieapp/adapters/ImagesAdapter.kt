@@ -20,8 +20,8 @@ class ImagesAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.Vi
     class ImageViewHolder(itemView: View, val context: Context) : RecyclerView.ViewHolder(itemView) {
         fun bindImage(image: Int) {
             Glide.with(context)
-                    .load(R.drawable.img1)
-                    .placeholder(R.drawable.img1)
+                    .load(image)
+                    .placeholder(R.drawable.movie_placeholder)
                     .centerCrop()
                     .into(itemView.movie_image)
         }
@@ -34,6 +34,6 @@ class ImagesAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.Vi
     override fun getItemCount(): Int = imagesList.size
 
     fun prepareImages(): MutableList<Int> {
-        return mutableListOf(R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1, R.drawable.img1)
+        return mutableListOf(R.drawable.img1, R.drawable.img2, R.drawable.img3, R.drawable.img1, R.drawable.img2, R.drawable.img3, R.drawable.img1, R.drawable.img2, R.drawable.img3)
     }
 }
